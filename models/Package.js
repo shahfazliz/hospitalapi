@@ -13,8 +13,7 @@ Packages.GetAllPackages = function GetAllPackages(result) {
             result(null, err);
         }
         else{
-            console.log('tasks : ', res);
-
+            console.log('Packages : ', res);
             result(null, res);
         }
     });
