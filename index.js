@@ -1,13 +1,16 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
-const ApiRouter = require('./routes/ApiRouter');
+const PackageRouter = require('./routes/PackageRouter');
+const port = '8050';
 require('./db');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/api', ApiRouter);
+//app.use('/api', ApiRouter);
 
-app.listen(process.env.PORT, function () {
-    console.log('listening on http port: ' + 8050);
+app.listen(port, function () {
+    console.log('listening on http port: ' + port);
 });
+
+PackageRouter(app);

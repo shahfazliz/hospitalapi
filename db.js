@@ -1,17 +1,15 @@
-module.exports = function () {
-    const mysql = require('mysql');
+const mysql = require('mysql');
 
-    let connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "hospitalapi"
-    });
+let connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "hospitalapi"
+});
 
-    connection.connect(function(err) {
-        if (err) throw err;
-        console.log('DB Connected');
-    });
+connection.connect(function (err) {
+    if (err) throw err;
+    console.log('DB Connected');
+});
 
-    return connection;
-}();
+module.exports = connection;
