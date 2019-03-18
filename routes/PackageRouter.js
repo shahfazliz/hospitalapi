@@ -1,8 +1,11 @@
-'use strict';
-module.exports = function(app) {
-    let packageController = require('../controllers/PackageController');
+const express = require('express');
+const PackageRouter = express.Router();
+const PackageController = require('../controllers/PackageController');
 
-    // todoList Routes
-    app.route('/packages')
-        .get(packageController.GetAllPackages);
-};
+/**
+ * Endpoint: /api/packages/
+ * Fetch all packages
+ */
+PackageRouter.get('/', PackageController.GetAllPackages);
+
+module.exports = PackageRouter;
