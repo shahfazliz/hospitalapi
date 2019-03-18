@@ -6,7 +6,7 @@ let Packages = function(packages){
     this.package_description = packages.package_description;
 };
 
-Packages.GetAllPackages = function GetAllPackages(result) {
+Packages.GetAllPackages = function (result) {
     sql.query("Select * from packages", function (err, res) {
 
         if(err) {
@@ -14,6 +14,18 @@ Packages.GetAllPackages = function GetAllPackages(result) {
         }
         else{
             result(null, res);
+        }
+    });
+};
+
+Packages.Create = function (req, result) {
+    sql.query("INSERT INTO packages set ?", req, function (err, res) {
+
+        if(err) {
+            console.error(err);
+        }
+        else{
+            result(null, res.insertId);
         }
     });
 };

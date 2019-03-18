@@ -8,4 +8,10 @@ const PackageController = require('../controllers/PackageController');
  */
 PackageRouter.get('/', PackageController.GetAllPackages);
 
+/**
+ * Endpoint: /api/jobs/create
+ * Create new job
+ */
+PackageRouter.post('/create', PackageController.Create);
+
 module.exports = PackageRouter;
