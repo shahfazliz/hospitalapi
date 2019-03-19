@@ -55,7 +55,7 @@ class PackageController{
 
     static async Delete(req, res){
         try{
-            await Package.remove( req.params.id, function(err) {
+            await Package.Remove( req.params.id, function(err) {
                 if (err)
                     res.send(err);
                 res.json({ message: 'Package successfully deleted' });
