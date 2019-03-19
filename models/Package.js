@@ -29,5 +29,16 @@ Packages.Create = function (req, result) {
         }
     });
 };
+Packages.Update = function(id, packages, result){
+    sql.query("UPDATE packages SET ? WHERE id = ?", [packages, id], function (err, res) {
+        if(err) {
+            console.log("error: ", err);
+            result(null, err);
+        }
+        else{
+            result(null, res);
+        }
+    });
+};
 
 module.exports= Packages;

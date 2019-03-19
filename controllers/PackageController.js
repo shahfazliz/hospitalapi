@@ -1,50 +1,70 @@
 let Package = require('../models/Package');
 
-exports.GetAllPackages = function(req, res) {
-    Package.GetAllPackages(function(err, packages) {
-        if (err)
-            res.send(err);
-        res.json({
-            message: 'Packages listing',
-            data: packages
-        });
-    });
-};
-
-exports.Create = function(req, res) {
-    let new_package = new Package(req.body);
-
-    //handles null error
-    if(!new_package.package_name){
-        res.status(400).send({ error:true, message: 'Please provide package name' });
-    }
-    else{
-        Package.Create(new_package, function(err, packages) {
-            if (err)
-                res.send(err);
-            res.json({
-                message: 'New package created!',
-                data: packages
+class PackageController{
+    static async GetAllPackages(req, res){
+        try {
+            await Package.GetAllPackages(function(err, packages) {
+                if (err)
+                    res.send(err);
+                res.json({
+                    message: 'Packages listing',
+                    data: packages
+                });
             });
-        });
+
+        } catch (err) {
+            res.status(err.code || 500).json({
+                msg: err.message
+            });
+        }
     }
-};
 
-exports.Update = function(req, res) {
-    Package.Update(req.params.id, new Package(req.body), function(err, packages) {
-        if (err)
-            res.send(err);
-        res.json({
-            message: 'Package updated!',
-            data: packages
-        });
-    });
-};
+    static async Create(req, res){
+        try {
+            await Package.Create(req.body, function(err, packages) {
+                if (err)
+                    res.send(err);
+                res.json({
+                    message: 'New package created!',
+                    data: packages
+                });
+            });
+        } catch (err) {
+            res.status(err.code || 500).json({
+                msg: err.message
+            });
+        }
+    }
 
-exports.Delete = function(req, res) {
-    Package.remove( req.params.id, function(err) {
-        if (err)
-            res.send(err);
-        res.json({ message: 'Task successfully deleted' });
-    });
-};
+    static async Update(req, res){
+        try{
+            await Package.Update(req.params.id, new Package(req.body), function(err, packages) {
+                if (err)
+                    res.send(err);
+                res.json({
+                    message: 'Package updated!',
+                    data: packages
+                });
+            });
+        } catch (err) {
+            res.status(err.code || 500).json({
+                msg: err.message
+            });
+        }
+    }
+
+    static async Delete(req, res){
+        try{
+            await Package.remove( req.params.id, function(err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'Package successfully deleted' });
+            });
+        } catch (err) {
+            res.status(err.code || 500).json({
+                msg: err.message
+            });
+        }
+    }
+}
+module.exports = PackageController;
