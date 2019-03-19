@@ -2,16 +2,10 @@ const express = require('express');
 const PackageRouter = express.Router();
 const PackageController = require('../controllers/PackageController');
 
-/**
- * Endpoint: /api/packages/
- * Fetch all packages
- */
-PackageRouter.get('/', PackageController.GetAllPackages);
 
-/**
- * Endpoint: /api/jobs/create
- * Create new job
- */
-PackageRouter.post('/create', PackageController.Create);
+PackageRouter.get('/', PackageController.GetAllPackages);
+PackageRouter.post('/', PackageController.Create);
+PackageRouter.put('/:id', PackageController.Update);
+PackageRouter.delete('/:id', PackageController.Delete);
 
 module.exports = PackageRouter;

@@ -29,3 +29,22 @@ exports.Create = function(req, res) {
         });
     }
 };
+
+exports.Update = function(req, res) {
+    Package.Update(req.params.id, new Package(req.body), function(err, packages) {
+        if (err)
+            res.send(err);
+        res.json({
+            message: 'Package updated!',
+            data: packages
+        });
+    });
+};
+
+exports.Delete = function(req, res) {
+    Package.remove( req.params.id, function(err) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Task successfully deleted' });
+    });
+};
