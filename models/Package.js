@@ -43,7 +43,6 @@ Packages.Update = function(id, req, result){
 
 Packages.Remove = function(id, result){
     sql.query("DELETE FROM packages WHERE id = ?", [id], function (err, res) {
-
         if(err) {
             console.log("error: ", err);
             result(null, err);
