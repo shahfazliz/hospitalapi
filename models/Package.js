@@ -18,6 +18,18 @@ Packages.GetAllPackages = function (result) {
     });
 };
 
+Packages.GetPackageById = function createUser(id, result) {
+    sql.query("Select * from packages where id = ? ", id, function (err, res) {
+        if(err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else{
+            result(null, res);
+        }
+    });
+};
+
 Packages.Create = function (req, result) {
     sql.query("INSERT INTO packages set ?", req, function (err, res) {
 
