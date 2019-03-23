@@ -21,7 +21,7 @@ class PackageController{
 
     static async GetPackageById(req, res){
         try {
-            await Package.GetPackageById(req.params.taskId, function(err, packages){
+            await Package.GetPackageById(req.params.id, function(err, packages){
                 if (err)
                     res.send(err);
                 res.json({

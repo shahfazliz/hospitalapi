@@ -19,6 +19,23 @@ class PatientController{
         }
     }
 
+    static async GetPatientById(req, res){
+        try {
+            await Patient.GetPatientById(req.params.id, function(err, packages){
+                if (err)
+                    res.send(err);
+                res.json({
+                    message: 'Package details',
+                    data: packages
+                });
+            });
+        } catch (err) {
+            res.status(err.code || 500).json({
+                msg: err.message
+            });
+        }
+    }
+
     static async Create(req, res){
         try {
             await Patient.Create(req.body, function(err, patients) {

@@ -4,6 +4,7 @@ const PatientController = require('../controllers/PatientController');
 
 PatientRouter.get('/', PatientController.GetAllPatients);
 PatientRouter.post('/', PatientController.Create);
+PatientRouter.get('/:id', PatientController.GetPatientById);
 PatientRouter.put('/:id', PatientController.Update);
 PatientRouter.delete('/:id', PatientController.Delete);
 
