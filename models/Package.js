@@ -17,7 +17,7 @@ Packages.GetAllPackages = function (result) {
     });
 };
 
-Packages.GetPackageById = function createUser(id, result) {
+Packages.GetPackageById = function (id, result) {
     sql.query("SELECT * from packages where id = ? ", id, function (err, res) {
         if(err) {
             console.log("error: ", err);

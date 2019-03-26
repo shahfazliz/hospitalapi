@@ -19,6 +19,18 @@ Patient.GetAllPatients = function (result) {
     });
 };
 
+Patient.GetPatientById = function (id, result) {
+    sql.query("SELECT * from patients where id = ? ", id, function (err, res) {
+        if(err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else{
+            result(null, res);
+        }
+    });
+};
+
 Patient.Create = function (req, result) {
     sql.query("INSERT INTO patients set ?", req, function (err, res) {
         if(err) {
