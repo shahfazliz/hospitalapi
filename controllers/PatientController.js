@@ -21,12 +21,12 @@ class PatientController{
 
     static async GetPatientById(req, res){
         try {
-            await Patient.GetPatientById(req.params.id, function(err, packages){
+            await Patient.GetPatientById(req.params.id, function(err, patient){
                 if (err)
                     res.send(err);
                 res.json({
                     message: 'Package details',
-                    data: packages
+                    data: patient
                 });
             });
         } catch (err) {
