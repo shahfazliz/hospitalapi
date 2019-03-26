@@ -2,8 +2,8 @@ let sql = require('./../db.js');
 
 //Task object constructor
 let Packages = function(packages){
-    this.package_name = packages.package_name;
-    this.package_description = packages.package_description;
+    this.name = packages.name;
+    this.description = packages.description;
 };
 
 Packages.GetAllPackages = function (result) {
