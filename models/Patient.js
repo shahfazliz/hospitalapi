@@ -10,7 +10,6 @@ let Patient = function(patient){
 
 Patient.GetAllPatients = function (result) {
     sql.query("Select * from patients", function (err, res) {
-
         if(err) {
             console.error(err);
         }
@@ -22,7 +21,6 @@ Patient.GetAllPatients = function (result) {
 
 Patient.Create = function (req, result) {
     sql.query("INSERT INTO patients set ?", req, function (err, res) {
-
         if(err) {
             console.error(err);
         }
