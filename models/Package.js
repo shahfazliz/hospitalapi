@@ -8,7 +8,6 @@ let Packages = function(packages){
 
 Packages.GetAllPackages = function (result) {
     sql.query("Select * from packages", function (err, res) {
-
         if(err) {
             console.error(err);
         }
@@ -32,7 +31,6 @@ Packages.GetPackageById = function createUser(id, result) {
 
 Packages.Create = function (req, result) {
     sql.query("INSERT INTO packages set ?", req, function (err, res) {
-
         if(err) {
             console.error(err);
         }
