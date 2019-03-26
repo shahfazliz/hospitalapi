@@ -9,7 +9,7 @@ let Patient = function(patient){
 };
 
 Patient.GetAllPatients = function (result) {
-    sql.query("Select * from patients", function (err, res) {
+    sql.query("SELECT * from patients", function (err, res) {
         if(err) {
             console.error(err);
         }
