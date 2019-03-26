@@ -2,8 +2,10 @@ let sql = require('./../db.js');
 
 //Task object constructor
 let Patient = function(patient){
-    this.patient_name = patient.patient_name;
-    this.patient_description = patient.patient_description;
+    this.name = patient.name;
+    this.ic = patient.ic;
+    this.email = patient.email;
+    this.contact = patient.contact;
 };
 
 Patient.GetAllPatients = function (result) {
@@ -29,6 +31,7 @@ Patient.Create = function (req, result) {
         }
     });
 };
+
 Patient.Update = function(id, req, result){
     sql.query("UPDATE patients SET ? WHERE id = ?", [req, id], function (err, res) {
         if(err) {
