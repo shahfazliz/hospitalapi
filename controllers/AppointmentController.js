@@ -1,9 +1,9 @@
 let Appointment = require('../models/Appointment');
 
 class AppointmentController{
-    static async GetAllAppointments(req, res){
+    static async GetAll(req, res){
         try {
-            await Appointment.GetAllAppointments(function(err, appointments) {
+            await Appointment.GetAll(function(err, appointments) {
                 if (err)
                     res.send(err);
                 res.json({
