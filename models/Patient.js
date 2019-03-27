@@ -31,8 +31,8 @@ Patient.GetPatientById = function (id, result) {
     });
 };
 
-Patient.Create = function (req, result) {
-    sql.query("INSERT INTO patients set ?", req, function (err, res) {
+Patient.Create = function (newPatient, result) {
+    sql.query("INSERT INTO patients set ?", newPatient, function (err, res) {
         if(err) {
             console.error(err);
         }
@@ -42,8 +42,8 @@ Patient.Create = function (req, result) {
     });
 };
 
-Patient.Update = function(id, req, result){
-    sql.query("UPDATE patients SET ? WHERE id = ?", [req, id], function (err, res) {
+Patient.Update = function(id, patient, result){
+    sql.query("UPDATE patients SET ? WHERE id = ?", [patient, id], function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);

@@ -29,8 +29,8 @@ Appointments.GetAppointmentById = function (id, result) {
     });
 };
 
-Appointments.Create = function (req, result) {
-    sql.query("INSERT INTO appointments set ?", req, function (err, res) {
+Appointments.Create = function (newAppointment, result) {
+    sql.query("INSERT INTO appointments set ?", newAppointment, function (err, res) {
         if(err) {
             console.error(err);
         }
@@ -40,8 +40,8 @@ Appointments.Create = function (req, result) {
     });
 };
 
-Appointments.Update = function(id, req, result){
-    sql.query("UPDATE appointments SET ? WHERE id = ?", [req, id], function (err, res) {
+Appointments.Update = function(id, appointment, result){
+    sql.query("UPDATE appointments SET ? WHERE id = ?", [appointment, id], function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);

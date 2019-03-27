@@ -29,8 +29,8 @@ Packages.GetPackageById = function (id, result) {
     });
 };
 
-Packages.Create = function (req, result) {
-    sql.query("INSERT INTO packages set ?", req, function (err, res) {
+Packages.Create = function (newPackage, result) {
+    sql.query("INSERT INTO packages set ?", newPackage, function (err, res) {
         if(err) {
             console.error(err);
         }
@@ -39,8 +39,8 @@ Packages.Create = function (req, result) {
         }
     });
 };
-Packages.Update = function(id, req, result){
-    sql.query("UPDATE packages SET ? WHERE id = ?", [req, id], function (err, res) {
+Packages.Update = function(id, packages, result){
+    sql.query("UPDATE packages SET ? WHERE id = ?", [packages, id], function (err, res) {
         if(err) {
             console.log("error: ", err);
             result(null, err);
