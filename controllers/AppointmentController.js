@@ -1,14 +1,14 @@
-let Patient = require('../models/Patient');
+let Appointment = require('../models/Appointment');
 
-class PatientController{
-    static async GetAllPatients(req, res){
+class AppointmentController{
+    static async GetAllAppointments(req, res){
         try {
-            await Patient.GetAllPatients(function(err, patients) {
+            await Appointment.GetAllAppointments(function(err, appointments) {
                 if (err)
                     res.send(err);
                 res.json({
-                    message: 'Patients listing',
-                    data: patients
+                    message: 'Appointments listing',
+                    data: appointments
                 });
             });
 
@@ -19,14 +19,14 @@ class PatientController{
         }
     }
 
-    static async GetPatientById(req, res){
+    static async GetAppointmentById(req, res){
         try {
-            await Patient.GetPatientById(req.params.id, function(err, patient){
+            await Appointment.GetAppointmentById(req.params.id, function(err, appointment){
                 if (err)
                     res.send(err);
                 res.json({
-                    message: 'Package details',
-                    data: patient
+                    message: 'Appointment details',
+                    data: appointment
                 });
             });
         } catch (err) {
@@ -38,12 +38,12 @@ class PatientController{
 
     static async Create(req, res){
         try {
-            await Patient.Create(req.body, function(err, patients) {
+            await Appointment.Create(req.body, function(err, appointments) {
                 if (err)
                     res.send(err);
                 res.json({
-                    message: 'New Patient created!',
-                    data: patients
+                    message: 'New Appointment created!',
+                    data: appointments
                 });
             });
         } catch (err) {
@@ -55,12 +55,12 @@ class PatientController{
 
     static async Update(req, res){
         try{
-            await Patient.Update(req.params.id, new Patient(req.body), function(err, patients) {
+            await Appointment.Update(req.params.id, new Appointment(req.body), function(err, appointments) {
                 if (err)
                     res.send(err);
                 res.json({
-                    message: 'Patient updated!',
-                    data: patients
+                    message: 'Appointment updated!',
+                    data: appointments
                 });
             });
         } catch (err) {
@@ -72,10 +72,10 @@ class PatientController{
 
     static async Delete(req, res){
         try{
-            await Patient.Remove(req.params.id, function(err) {
+            await Appointment.Remove(req.params.id, function(err) {
                 if (err)
                     res.send(err);
-                res.json({ message: 'Patient successfully deleted' });
+                res.json({ message: 'Appointment successfully deleted' });
             });
         } catch (err) {
             res.status(err.code || 500).json({
@@ -84,4 +84,4 @@ class PatientController{
         }
     }
 }
-module.exports = PatientController;
+module.exports = AppointmentController;
