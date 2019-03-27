@@ -1,4 +1,5 @@
 let Appointment = require('../models/Appointment');
+const CustomError = require('../CustomError');
 
 class AppointmentController{
     static async GetAll(req, res){
@@ -13,9 +14,7 @@ class AppointmentController{
             });
 
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -30,9 +29,7 @@ class AppointmentController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -47,9 +44,7 @@ class AppointmentController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -64,9 +59,7 @@ class AppointmentController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -78,9 +71,7 @@ class AppointmentController{
                 res.json({ message: 'Appointment successfully deleted' });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 }

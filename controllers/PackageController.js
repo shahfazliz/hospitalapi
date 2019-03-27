@@ -1,6 +1,14 @@
 let Package = require('../models/Package');
+const CustomError = require('../CustomError');
 
 class PackageController{
+    /**
+     * Get all packages
+     *
+     * @param req
+     * @param res
+     * @returns {Promise<void>}
+     */
     static async GetAll(req, res){
         try {
             await Package.GetAll(function(err, packages) {
@@ -13,12 +21,17 @@ class PackageController{
             });
 
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
+    /**
+     * Get a single package
+     *
+     * @param req
+     * @param res
+     * @returns {Promise<void>}
+     */
     static async GetPackageById(req, res){
         try {
             await Package.GetPackageById(req.params.id, function(err, packages){
@@ -30,9 +43,7 @@ class PackageController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -43,19 +54,24 @@ class PackageController{
                     res.send(err);
                 res.json({
                     message: 'New package created!',
-                    data: packages
+                    data: packages.insertId
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
+    /**
+     * Edit an existing package
+     *
+     * @param req
+     * @param res
+     * @returns {Promise<void>}
+     */
     static async Update(req, res){
         try{
-            await Package.Update(req.params.id, new Package(req.body), function(err, packages) {
+            await Package.Update(req.params.id, req.body, function(err, packages) {
                 if (err)
                     res.send(err);
                 res.json({
@@ -64,9 +80,7 @@ class PackageController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -78,9 +92,7 @@ class PackageController{
                 res.json({ message: 'Package successfully deleted' });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 }

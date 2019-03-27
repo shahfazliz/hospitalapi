@@ -1,69 +1,25 @@
 let sql = require('./../db.js');
 
-//Task object constructor
-let Patient = function(patient){
-    this.name = patient.name;
-    this.ic = patient.ic;
-    this.email = patient.email;
-    this.contact = patient.contact;
-};
+class PatientClass {
+    static async GetAll(result) {
+        return await sql.query("Select * from patients", result);
+    }
 
-Patient.GetAllPatients = function (result) {
-    sql.query("SELECT * from patients", function (err, res) {
-        if(err) {
-            console.error(err);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
+    static async GetPatientById(id, result){
+        return await sql.query("SELECT * from patients where id = ? ", id, result);
+    }
 
-Patient.GetPatientById = function (id, result) {
-    sql.query("SELECT * from patients where id = ? ", id, function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(err, null);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
+    static async Create(newPatient, result){
+        return await sql.query("INSERT INTO patients set ?", newPatient, result);
+    }
 
-Patient.Create = function (newPatient, result) {
-    sql.query("INSERT INTO patients set ?", newPatient, function (err, res) {
-        if(err) {
-            console.error(err);
-        }
-        else{
-            result(null, res.insertId);
-        }
-    });
-};
+    static async Update(id, patient, result){
+        return await sql.query("UPDATE patients SET ? WHERE id = ?", [patient, id], result);
+    }
 
-Patient.Update = function(id, patient, result){
-    sql.query("UPDATE patients SET ? WHERE id = ?", [patient, id], function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
+    static async Remove(id, result){
+        return await sql.query("DELETE FROM patients WHERE id = ?", [id], result);
+    }
+}
 
-Patient.Remove = function(id, result){
-    sql.query("DELETE FROM patients WHERE id = ?", [id], function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
-
-module.exports= Patient;
+module.exports= PatientClass;

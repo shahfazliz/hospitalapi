@@ -1,9 +1,10 @@
 let Patient = require('../models/Patient');
+const CustomError = require('../CustomError');
 
 class PatientController{
-    static async GetAllPatients(req, res){
+    static async GetAll(req, res){
         try {
-            await Patient.GetAllPatients(function(err, patients) {
+            await Patient.GetAll(function(err, patients) {
                 if (err)
                     res.send(err);
                 res.json({
@@ -13,9 +14,7 @@ class PatientController{
             });
 
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -30,9 +29,7 @@ class PatientController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -47,9 +44,7 @@ class PatientController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -64,9 +59,7 @@ class PatientController{
                 });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 
@@ -78,9 +71,7 @@ class PatientController{
                 res.json({ message: 'Patient successfully deleted' });
             });
         } catch (err) {
-            res.status(err.code || 500).json({
-                msg: err.message
-            });
+            CustomError.handle(err, res);
         }
     }
 }
