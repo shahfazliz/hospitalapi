@@ -39,6 +39,7 @@ Appointments.Create = function (req, result) {
         }
     });
 };
+
 Appointments.Update = function(id, req, result){
     sql.query("UPDATE appointments SET ? WHERE id = ?", [req, id], function (err, res) {
         if(err) {
