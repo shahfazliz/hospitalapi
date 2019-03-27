@@ -1,5 +1,11 @@
 let sql = require('./../db.js');
 
+//Task object constructor
+let Appointments = function(appointments){
+    this.name = appointments.name;
+    this.description = appointments.description;
+};
+
 Appointments.GetAll = function (result) {
     sql.query("Select * from appointments", function (err, res) {
         if(err) {

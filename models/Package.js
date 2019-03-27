@@ -6,7 +6,7 @@ let Packages = function(packages){
     this.description = packages.description;
 };
 
-Packages.GetAllPackages = function (result) {
+Packages.GetAll = function (result) {
     sql.query("Select * from packages", function (err, res) {
         if(err) {
             console.error(err);

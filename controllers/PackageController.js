@@ -1,9 +1,9 @@
 let Package = require('../models/Package');
 
 class PackageController{
-    static async GetAllPackages(req, res){
+    static async GetAll(req, res){
         try {
-            await Package.GetAllPackages(function(err, packages) {
+            await Package.GetAll(function(err, packages) {
                 if (err)
                     res.send(err);
                 res.json({
