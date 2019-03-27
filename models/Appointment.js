@@ -1,67 +1,25 @@
 let sql = require('./../db.js');
 
-//Task object constructor
-let Appointments = function(appointments){
-    this.name = appointments.name;
-    this.description = appointments.description;
-};
+class AppointmentClass {
+    static async GetAll(result) {
+        return await sql.query("Select * from appointments", result);
+    }
 
-Appointments.GetAll = function (result) {
-    sql.query("Select * from appointments", function (err, res) {
-        if(err) {
-            console.error(err);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
+    static async GetAppointmentById(id, result){
+        return await sql.query("SELECT * from appointments where id = ? ", id, result);
+    }
 
-Appointments.GetAppointmentById = function (id, result) {
-    sql.query("SELECT * from appointments where id = ? ", id, function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(err, null);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
+    static async Create(newAppointment, result){
+        return await sql.query("INSERT INTO appointments set ?", newAppointment, result);
+    }
 
-Appointments.Create = function (newAppointment, result) {
-    sql.query("INSERT INTO appointments set ?", newAppointment, function (err, res) {
-        if(err) {
-            console.error(err);
-        }
-        else{
-            result(null, res.insertId);
-        }
-    });
-};
+    static async Update(id, patient, result){
+        return await sql.query("UPDATE appointments SET ? WHERE id = ?", [patient, id], result);
+    }
 
-Appointments.Update = function(id, appointment, result){
-    sql.query("UPDATE appointments SET ? WHERE id = ?", [appointment, id], function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
+    static async Remove(id, result){
+        return await sql.query("DELETE FROM appointments WHERE id = ?", [id], result);
+    }
+}
 
-Appointments.Remove = function(id, result){
-    sql.query("DELETE FROM appointments WHERE id = ?", [id], function (err, res) {
-        if(err) {
-            console.log("error: ", err);
-            result(null, err);
-        }
-        else{
-            result(null, res);
-        }
-    });
-};
-
-module.exports= Appointments;
+module.exports= AppointmentClass;
