@@ -72,7 +72,7 @@ class PatientController{
 
     static async Delete(req, res){
         try{
-            await Patient.Remove( req.params.id, function(err) {
+            await Patient.Remove(req.params.id, function(err) {
                 if (err)
                     res.send(err);
                 res.json({ message: 'Patient successfully deleted' });
