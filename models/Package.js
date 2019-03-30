@@ -2,15 +2,15 @@ let sql = require('./../db.js');
 
 class PackagesClass {
     static async GetAll(result) {
-        return await sql.query("SELECT * from packages", result);
+        return await sql.query("SELECT * FROM packages", result);
     }
 
     static async GetPackageById(id, result){
-        return await sql.query("SELECT * from packages where id = ? ", id, result);
+        return await sql.query("SELECT * FROM packages WHERE id = ? ", id, result);
     }
 
     static async Create(newPackage, result){
-        return await sql.query("INSERT INTO packages set ?", newPackage, result);
+        return await sql.query("INSERT INTO packages SET ?", newPackage, result);
     }
 
     static async Update(id, packages, result){
@@ -19,14 +19,6 @@ class PackagesClass {
 
     static async Remove(id, result){
         return await sql.query("DELETE FROM packages WHERE id = ?", [id], result);
-    }
-
-    static isEmpty(obj) {
-        for(let key in obj) {
-            if(obj.hasOwnProperty(key))
-                return false;
-        }
-        return true;
     }
 }
 
