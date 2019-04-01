@@ -1,8 +1,14 @@
 let sql = require('./../db.js');
 
 class PackagesClass {
-    static async GetAll(result) {
-        return await sql.query("SELECT * FROM packages", result);
+    static async GetAll(req, res) {
+        let package_sql = "SELECT * FROM packages";
+        const existingParams = ["name", "description"].filter(field => req[field]);
+        if (existingParams.length) {
+            package_sql += " WHERE ";
+            package_sql += existingParams.map(field => `${field} = ?`).join(" AND ");
+        }
+        return await sql.query(package_sql, existingParams.map(field => req[field]), res);
     }
 
     static async GetPackageById(id, result){

@@ -11,7 +11,7 @@ class PackageController{
      */
     static async GetAll(req, res){
         try {
-            await Package.GetAll(function(err, packages) {
+            await Package.GetAll(req.query,function(err, packages) {
                 if (err)
                     res.send(err);
                 res.json({
