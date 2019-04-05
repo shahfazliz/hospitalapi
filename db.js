@@ -1,8 +1,9 @@
 const mysql = require('mysql');
+const username = process.env.C9_USER || "root";
 
 let connection = mysql.createConnection({
     host: "localhost",
-    user: "root",
+    user: username,
     password: "",
     database: "hospitalapi"
 });
