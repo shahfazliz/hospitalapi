@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 import womans_wellness_package_image from '../images/womans_wellness_package.jpg';
 import womans_wellness_package_image_2 from '../images/womans_wellness_package_2.jpg';
@@ -14,6 +15,10 @@ class Package extends Component {
     state = {
         packages: [],
     };
+    
+    selectRandomElement(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
 
     componentDidMount() {
         const samplePackage = [1,2,3,4,5,6];
@@ -24,6 +29,7 @@ class Package extends Component {
             corporate_wellness_screening_package_image,
             scanner_3D_4D_hd_live,
         ];
+        const doctors = ['Azimah', 'Renu'];
 
         this.setState({
             packages: samplePackage.map((item, index) =>
@@ -31,14 +37,15 @@ class Package extends Component {
                     margin: '1em',
                     width: "15em"
                 }}>
-                    <Card.Img variant="top" src={package_image[Math.floor(Math.random() * package_image.length)]} />
+                    <Card.Img variant="top" src={this.selectRandomElement(package_image)} />
                     <Card.Body>
-                        {/* <Card.Title>Card Title</Card.Title>
+                        {/*<Card.Title>Card Title</Card.Title>*/}
                         <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </Card.Text> */}
-                        <Button variant="primary">Make Appointment</Button>
+                            Click the Appointment button below with Dr. {this.selectRandomElement(doctors)}
+                        </Card.Text>
+                        <Link to='/appointment'>
+                            <Button variant="primary">Make Appointment</Button>
+                        </Link>
                     </Card.Body>
                 </Card>),
         });

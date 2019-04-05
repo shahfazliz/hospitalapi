@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Home from './components/Home';
 import Navigation from './components/Navigation';
 import AboutUs from './components/AboutUs';
+import Appointment from './components/Appointment';
 import Package from './components/Package';
 
 import './App.css';
@@ -21,6 +22,11 @@ class App extends Component {
 	to: '/about',
 	as: NavLink,
 	component: AboutUs,
+  }, {
+    name: 'Appointment',
+	to: '/appointment',
+	as: NavLink,
+	component: Appointment,
   }, {
     name: 'Package',
 	to: '/package',
