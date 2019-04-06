@@ -7,11 +7,16 @@ class PatientRecordClass {
             FROM patient_records pr
             INNER JOIN patients p on p.id = pr.patient_id
             INNER JOIN doctors d on d.id = pr.doctor_id
-            ORDER BY pr.created_at DESC`, result);
+            ORDER BY UNIX_TIMESTAMP(pr.created_at) DESC`, result);
     }
 
     static async GetPatientById(id, result){
-        return await sql.query("SELECT * from patient_records where patient_id = ? ", id, result);
+        return await sql.query(
+            `SELECT pr.created_at, d.name AS doctor, pr.diagnosis, pr.treatment
+            FROM patient_records pr
+            INNER JOIN doctors d on d.id = pr.doctor_id
+            WHERE patient_id = ?
+            ORDER BY UNIX_TIMESTAMP(pr.created_at) DESC`, id, result);
     }
 
     static async Create(newPatientRecord, result){

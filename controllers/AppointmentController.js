@@ -33,6 +33,44 @@ class AppointmentController{
         }
     }
 
+    static async GetAppointmentByDoctorId(req, res){
+        try {
+            await Appointment.GetAppointmentByDoctorId(
+                req.params.id, 
+                req.params.startDateTime,
+                req.params.endDateTime,
+                function(err, appointment){
+                    if (err)
+                        res.send(err);
+                    res.json({
+                        message: 'Appointment details',
+                        data: appointment
+                    });
+                });
+        } catch (err) {
+            CustomError.handle(err, res);
+        }
+    }
+    
+    static async GetAppointmentByPatientId(req, res){
+        try {
+            await Appointment.GetAppointmentPatientById(
+                req.params.id,
+                decodeURI(req.params.startDateTime),
+                decodeURI(req.params.endDateTime),
+                function(err, appointment){
+                    if (err)
+                        res.send(err);
+                    res.json({
+                        message: 'Appointment details',
+                        data: appointment
+                    });
+                });
+        } catch (err) {
+            CustomError.handle(err, res);
+        }
+    }
+    
     static async Create(req, res){
         try {
             await Appointment.Create(req.body, function(err, appointments) {

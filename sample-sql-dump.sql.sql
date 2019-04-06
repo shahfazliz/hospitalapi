@@ -22,20 +22,16 @@ CREATE TABLE `packages` (
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `price` decimal(13,2) NOT NULL,
+  `image` varchar(255) NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `packages` (`name`, `description`, `price`) VALUES
-('Package 1', 'Description of Package 1', '0.00'),
-('Package 2', 'Description of Package 2', '0.00'),
-('Package 3', 'Description of Package 3', '0.00'),
-('Package 4', 'Description of Package 4', '0.00'),
-('Package 5', 'Description of Package 5', '0.00'),
-('Package 6', 'Description of Package 6', '0.00'),
-('Package 7', 'Description of Package 7', '0.00'),
-('Package 8', 'Description of Package 8', '0.00'),
-('Package 10', 'Description of Package Ten', '0.00'),
-('Package 9', 'Description of Package 9', '0.00');
+INSERT INTO `packages` (`name`, `description`, `price`, `image`) VALUES
+('Corporate Wellness Screening (Single)', '', '600.00', 'corporate_wellness_screening.jpg'),
+('Corporate Wellness Screening (Couple)', '', '1000.00', 'corporate_wellness_screening.jpg'),
+('3D 4D HD Live', '', '150.00', '3D_4D_HD_live.png'),
+('Neonatal Jaundice Test', '', '50.00', 'neonatal_jaundice_test.jpg'),
+('Womans Wellness', '', '280.00', 'womans_wellness_package_2.jpg');
 
 -- --------------------------------------------------------
 -- Table structure for table `patients`
@@ -99,15 +95,22 @@ CREATE TABLE `appointments` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `patient_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `start_time` varchar(10) NOT NULL,
-  `end_time` varchar(10) NOT NULL,
+  `date_time` datetime NOT NULL,
+  `description` varchar(255) NOT NULL,
   `status` text,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` varchar(11) NOT NULL,
   FOREIGN KEY(patient_id) REFERENCES patients(id),
   FOREIGN KEY(doctor_id) REFERENCES doctors(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `appointments` (`patient_id`, `doctor_id`, `date_time`, `description`) VALUES
+((select id from patients where name='Shah'), (select id from doctors where name='Azimah'), '2019-04-06 10:00:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Shah'), (select id from doctors where name='Renu'), '2019-04-06 10:30:00', 'Corporate wellness screening (single)'),
+((select id from patients where name='Danil'), (select id from doctors where name='Azimah'), '2019-04-06 11:00:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Danil'), (select id from doctors where name='Renu'), '2019-04-06 11:30:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Hasrul'), (select id from doctors where name='Azimah'), '2019-04-06 12:00:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Hasrul'), (select id from doctors where name='Renu'), '2019-04-06 12:30:00', 'Corporate wellness screening (single)');
 
 -- --------------------------------------------------------
 COMMIT;
