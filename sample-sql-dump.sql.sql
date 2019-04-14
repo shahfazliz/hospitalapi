@@ -42,6 +42,7 @@ CREATE TABLE `patients` (
   `ic` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contact` int(11) NOT NULL,
+  `active` int(1) DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,6 +60,7 @@ CREATE TABLE `doctors` (
   `ic` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contact` int(11) NOT NULL,
+  `active` int(1) DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -75,6 +77,7 @@ CREATE TABLE `patient_records` (
   `doctor_id` int(11) NOT NULL,
   `diagnosis` varchar(255) NOT NULL,
   `treatment` varchar(255) NOT NULL,
+  `archive` int(1) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY(patient_id) REFERENCES patients(id),
   FOREIGN KEY(doctor_id) REFERENCES doctors(id)
@@ -105,12 +108,12 @@ CREATE TABLE `appointments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `appointments` (`patient_id`, `doctor_id`, `date_time`, `description`) VALUES
-((select id from patients where name='Shah'), (select id from doctors where name='Azimah'), '2019-04-06 10:00:00', 'Corporate wellness screening (single)'), 
-((select id from patients where name='Shah'), (select id from doctors where name='Renu'), '2019-04-06 10:30:00', 'Corporate wellness screening (single)'),
-((select id from patients where name='Danil'), (select id from doctors where name='Azimah'), '2019-04-06 11:00:00', 'Corporate wellness screening (single)'), 
-((select id from patients where name='Danil'), (select id from doctors where name='Renu'), '2019-04-06 11:30:00', 'Corporate wellness screening (single)'), 
-((select id from patients where name='Hasrul'), (select id from doctors where name='Azimah'), '2019-04-06 12:00:00', 'Corporate wellness screening (single)'), 
-((select id from patients where name='Hasrul'), (select id from doctors where name='Renu'), '2019-04-06 12:30:00', 'Corporate wellness screening (single)');
+((select id from patients where name='Shah'), (select id from doctors where name='Azimah'), '2019-04-07 02:00:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Shah'), (select id from doctors where name='Renu'), '2019-04-07 02:30:00', 'Corporate wellness screening (single)'),
+((select id from patients where name='Danil'), (select id from doctors where name='Azimah'), '2019-04-07 03:00:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Danil'), (select id from doctors where name='Renu'), '2019-04-07 03:30:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Hasrul'), (select id from doctors where name='Azimah'), '2019-04-07 04:00:00', 'Corporate wellness screening (single)'), 
+((select id from patients where name='Hasrul'), (select id from doctors where name='Renu'), '2019-04-07 04:30:00', 'Corporate wellness screening (single)');
 
 -- --------------------------------------------------------
 COMMIT;
